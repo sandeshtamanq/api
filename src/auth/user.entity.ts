@@ -28,7 +28,9 @@ export class User extends BaseEntity {
   task: Task[];
 
   async validatePassword(password: string): Promise<boolean> {
-    const verifyPassword = bcrypt.compare(password, this.password);
+    console.log(password);
+    const verifyPassword = await bcrypt.compare(password, this.password);
+    console.log(verifyPassword);
     return verifyPassword;
   }
 }

@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 import { UserRepository } from './user.repository';
@@ -24,7 +28,7 @@ export class AuthService {
       authCredentiaDto,
     );
     if (!username) {
-      throw new UnauthorizedException();
+      throw new HttpException('Incorrect Username or password', 403);
     }
 
     const payload: jwtPayload = { username };

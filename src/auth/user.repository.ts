@@ -38,6 +38,7 @@ export class UserRepository extends Repository<User> {
   ): Promise<string> {
     const { username, password } = authCredentiaDto;
     const user = await this.findOne({ where: { username } });
+    console.log(user);
     if (user && (await user.validatePassword(password))) {
       return user.username;
     } else {
